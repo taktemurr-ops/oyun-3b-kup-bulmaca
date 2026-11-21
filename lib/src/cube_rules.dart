@@ -8,6 +8,10 @@ import 'cube_engine.dart';
 const kupBulmacaId = 'oyun-3b-kup-bulmaca';
 
 class CubeRules extends GameRules<CubeLevel> {
+  /// Üretim + çözücü türü: 100.000 numaralı bölüm (1000 dünya).
+  @override
+  int get levelCount => 100000;
+
   @override
   String get gameId => kupBulmacaId;
 
