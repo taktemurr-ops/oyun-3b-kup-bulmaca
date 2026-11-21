@@ -80,7 +80,7 @@ final kupBulmacaConfig = GameConfig(
       'Xoay mảnh, hoàn thành khối lập phương!',
       'Paikutin ang mga piraso, kumpletuhin ang cube!',
     ],
-  seedColor: const Color(0xFF0288D1),
+  seedColor: const Color(0xFF3A7CA5),
   icon: Icons.view_in_ar_rounded,
   rules: CubeRules(),
   buildPlay: (ctx) => CubeView(ctx: ctx),
