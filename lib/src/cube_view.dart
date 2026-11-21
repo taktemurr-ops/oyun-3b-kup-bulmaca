@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:studio_core/core/strings.dart';
 import 'package:studio_core/app/game_api.dart';
 import 'package:studio_core/app/services/audio.dart';
 import 'package:studio_core/core/game_rules.dart';
@@ -26,7 +27,6 @@ class _CubeViewState extends State<CubeView> {
   bool _ended = false;
 
   PlayContext get ctx => widget.ctx;
-  bool get _tr => ctx.lang == 'tr';
 
   @override
   void initState() {
@@ -113,7 +113,7 @@ class _CubeViewState extends State<CubeView> {
           child: Row(children: [
             Expanded(
               child: Text(
-                  _tr ? 'Doldurulan: ${game.filled} / ${n * n * n}' : 'Filled: ${game.filled} / ${n * n * n}',
+                  Strings.tx(ctx.lang, 'Doldurulan: {0} / {1}', 'Filled: {0} / {1}', [game.filled, n * n * n]),
                   style: Theme.of(context).textTheme.titleSmall),
             ),
             const Icon(Icons.timer_outlined, size: 18),
@@ -143,7 +143,7 @@ class _CubeViewState extends State<CubeView> {
           for (var z = 0; z < n; z++) ...[
             if (z > 0) const SizedBox(width: 14),
             Column(children: [
-              Text(_tr ? 'Kat ${z + 1}' : 'Layer ${z + 1}', style: Theme.of(context).textTheme.labelSmall),
+              Text(Strings.tx(ctx.lang, 'Kat {0}', 'Layer {0}', [z + 1]), style: Theme.of(context).textTheme.labelSmall),
               const SizedBox(height: 2),
               _layer(z, layerCell),
             ]),

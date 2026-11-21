@@ -152,7 +152,7 @@ final kupBulmacaConfig = GameConfig(
       'टुकड़ा रखने के लिए परत का खाना छुएँ। भरा खाना छूने से हटता है।',
       'টুকরো বসাতে স্তরের ঘর ছুঁন। ভরা ঘর ছুঁলে সরে যায়।',
       'Ketuk kotak lapisan untuk menaruh keping. Ketuk kotak terisi untuk mengambilnya.',
-      'Ketik kotak lapisan untuk menaruh keping. Ketik kotak terisi untuk mengambilnya.',
+      'Ketik petak lapisan untuk menaruh keping. Ketik petak terisi untuk mengambilnya.',
       'แตะช่องของชั้นเพื่อวางชิ้น แตะช่องที่มีชิ้นเพื่อเอาออก',
       'Chạm ô của một tầng để đặt mảnh. Chạm ô đã có để lấy ra.',
       'I-tap ang kahon ng isang layer para ilagay ang piraso. I-tap ang punong kahon para alisin.',
