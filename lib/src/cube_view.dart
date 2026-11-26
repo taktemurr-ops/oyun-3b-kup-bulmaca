@@ -6,19 +6,36 @@ import 'package:studio_core/core/strings.dart';
 import 'package:studio_core/app/game_api.dart';
 import 'package:studio_core/app/services/audio.dart';
 import 'package:studio_core/core/game_rules.dart';
+import 'package:studio_core/app/studio_ui.dart';
 
 import 'cube_engine.dart';
 import 'cube_rules.dart';
 
-class CubeView extends StatefulWidget {
+final Map<StudioLook, ThemeData> _studioThemes = {};
+
+/// Oyun ekranı: düğmeler, çipler, üst bilgi ve pencereler onaylı koyu
+/// tasarımda (merkezin paleti, studio-core StudioLook); tahta çizimi kendi
+/// renklerini korur.
+class CubeView extends StatelessWidget {
   final PlayContext ctx;
   const CubeView({super.key, required this.ctx});
 
   @override
-  State<CubeView> createState() => _CubeViewState();
+  Widget build(BuildContext context) {
+    final look = StudioLook.of(context);
+    return Theme(data: _studioThemes[look] ??= buildStudioTheme(look), child: CubeViewBody(ctx: ctx));
+  }
 }
 
-class _CubeViewState extends State<CubeView> {
+class CubeViewBody extends StatefulWidget {
+  final PlayContext ctx;
+  const CubeViewBody({super.key, required this.ctx});
+
+  @override
+  State<CubeViewBody> createState() => _CubeViewState();
+}
+
+class _CubeViewState extends State<CubeViewBody> {
   late CubeLevel level;
   late CubeGame game;
   int? _selected;
