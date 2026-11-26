@@ -13,15 +13,29 @@ import 'cube_rules.dart';
 
 final Map<StudioLook, ThemeData> _studioThemes = {};
 
-class CubeView extends StatefulWidget {
+/// Oyun ekranı: düğmeler, çipler, üst bilgi ve pencereler onaylı koyu
+/// tasarımda (merkezin paleti, studio-core StudioLook); tahta çizimi kendi
+/// renklerini korur.
+class CubeView extends StatelessWidget {
   final PlayContext ctx;
   const CubeView({super.key, required this.ctx});
 
   @override
-  State<CubeView> createState() => _CubeViewState();
+  Widget build(BuildContext context) {
+    final look = StudioLook.of(context);
+    return Theme(data: _studioThemes[look] ??= buildStudioTheme(look), child: CubeViewBody(ctx: ctx));
+  }
 }
 
-class _CubeViewState extends State<CubeView> {
+class CubeViewBody extends StatefulWidget {
+  final PlayContext ctx;
+  const CubeViewBody({super.key, required this.ctx});
+
+  @override
+  State<CubeViewBody> createState() => _CubeViewState();
+}
+
+class _CubeViewState extends State<CubeViewBody> {
   late CubeLevel level;
   late CubeGame game;
   int? _selected;
@@ -104,15 +118,8 @@ class _CubeViewState extends State<CubeView> {
 
   Color colorOf(int c) => ctx.pieceColors[(c - 1) % ctx.pieceColors.length];
 
-  /// Oyun içi düğmeler, çipler ve yazılar onaylı koyu tasarımda (merkezin
-  /// paleti); tahta çizimi kendi renklerini korur.
   @override
   Widget build(BuildContext context) {
-    final look = StudioLook.of(context);
-    return Theme(data: _studioThemes[look] ??= buildStudioTheme(look), child: Builder(builder: _build));
-  }
-
-  Widget _build(BuildContext context) {
     final n = level.n;
     return LayoutBuilder(builder: (context, cons) {
       final layerCell = math.max(16.0, math.min((cons.maxWidth - 24 - (n - 1) * 14) / (n * n), 44.0));
