@@ -6,9 +6,12 @@ import 'package:studio_core/core/strings.dart';
 import 'package:studio_core/app/game_api.dart';
 import 'package:studio_core/app/services/audio.dart';
 import 'package:studio_core/core/game_rules.dart';
+import 'package:studio_core/app/studio_ui.dart';
 
 import 'cube_engine.dart';
 import 'cube_rules.dart';
+
+final Map<StudioLook, ThemeData> _studioThemes = {};
 
 class CubeView extends StatefulWidget {
   final PlayContext ctx;
@@ -101,8 +104,15 @@ class _CubeViewState extends State<CubeView> {
 
   Color colorOf(int c) => ctx.pieceColors[(c - 1) % ctx.pieceColors.length];
 
+  /// Oyun içi düğmeler, çipler ve yazılar onaylı koyu tasarımda (merkezin
+  /// paleti); tahta çizimi kendi renklerini korur.
   @override
   Widget build(BuildContext context) {
+    final look = StudioLook.of(context);
+    return Theme(data: _studioThemes[look] ??= buildStudioTheme(look), child: Builder(builder: _build));
+  }
+
+  Widget _build(BuildContext context) {
     final n = level.n;
     return LayoutBuilder(builder: (context, cons) {
       final layerCell = math.max(16.0, math.min((cons.maxWidth - 24 - (n - 1) * 14) / (n * n), 44.0));
